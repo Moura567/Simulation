@@ -4,7 +4,7 @@ import numpy as np
 from prettytable import PrettyTable
 
 intial = 0
-size = 10
+size = 1000000
 InterArrivalTime = [intial] * size
 ArrivalTime = [intial] * size
 ServiceStart = [intial] * size
@@ -37,6 +37,7 @@ def generateST():
 
 
 x = round(0, 2)
+
 for i in range(size):
     InterArrivalTime[i] = round(generateIAT(), 2)
     ServiceTime[i] = round(generateST(), 2)
@@ -81,6 +82,7 @@ for i in range(size):
                 AvailableForServer1[i] = AvailableForServer1[i - 1]
                 utz2 = utz2 + ServiceTime[i]
         f=Completion[i]
+for i in range(15):
     table.add_row([i+1,round(InterArrivalTime[i], 2)
                       , round(ArrivalTime[i], 2)
                       , round(ServiceStart[i], 2)
@@ -97,6 +99,7 @@ for i in range(size):
     if(WaitingTime[i]>0):
         t+=1
     z=max(z,t)
+
 print("Average waiting time ", sum(WaitingTime) / size)
 print("Number of customers had wait",counter)
 print("utz time of simulation ",f)
@@ -106,6 +109,7 @@ print("Utilization for ATM1= ",round(utz1/max(AvailableForServer1),3))
 print("Utilization for ATM2= ",round(utz2/max(AvailableForServer2),3))
 print("Maximum number in queue ",z)
 print("Average time in system ", sum(TimeInSystem) / size)
+
 plt.hist(WaitingTime,  bins = 35)
 plt.ylabel('Number of customers')
 plt.xlabel('Waiting time')
